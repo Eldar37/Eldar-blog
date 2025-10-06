@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ post.title }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.text }}</p>
+    <p>Категории: 
+        {% for cat in post.categories.all %}
+            {{ cat.name }}
+        {% endfor %}
+    </p>
+    <p>Автор: {{ post.author }} | {{ post.created_at }}</p>
+    <a class="btn btn-primary" href="{% url 'post_update' post.id %}">Редактировать</a>
+    <form action="{% url 'post_delete' post.id %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Удалить</button>
+    </form>
+    <a class="btn btn-secondary" href="{% url 'post_list' %}">Назад к списку</a>
+</body>
+</html>

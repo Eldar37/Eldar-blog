@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Список постов{% endblock %}
+
+{% block content %}
+   {% for post in posts %}
+        <h3><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h3>
+        <p>{{post.text}}</p>
+    {% empty %}
+        <p>Пока постов нет</p>
+   {% endfor %}
+
+{% endblock %}
